@@ -13,16 +13,16 @@
 		var location = document.getElementById("location").value;
 		var city = location.split(",")[0];
 		var state = location.split(",")[1];
-		
-		data1(city);		
-		data2(state);
-		loadVen();
+		if(location != "") {
+			data1(city);		
+			data2(state);
+			loadVen();
+		}
 	}
 
 	function loadVen() {
 		var img = document.getElementById("ven");
 		var url = "https://chart.googleapis.com/chart?cht=v&chs=250x100&chd=t:";
-		alert(cityCount + "," + stateCount);
 		url += cityCount + ",";
 		url += stateCount + ",0,50";
 		img.src = url;
@@ -42,8 +42,6 @@
 				var index2 = temp.indexOf(","); 
 				var temp2 = temp.slice(16, index2-1);
 				cityCount = parseInt(temp2);	
-				//document.getElementById("check").innerHTML += temp2;
-				// alert(cityCount);
 			}
 		}
 
@@ -64,8 +62,6 @@
 				var index2 = temp.indexOf(","); 
 				var temp2 = temp.slice(16, index2-1);
 				stateCount = parseInt(temp2);
-				//document.getElementById("check").innerHTML += temp2;
-				// alert(stateCount);
 			}
 		}
 		xmlhttp2.open("GET", gurl, true);
@@ -143,12 +139,13 @@
 var url ="https://www.googleapis.com/customsearch/v1?key=AIzaSyCde5Hxz11Z-SFEtZSQO0f7PjUhdhEHo5U&cx=013036536707430787589:_pqjad5hr1a&q=accident"
 
 </script>
-
-<span>Location(city,state,country): <input id="location" type="text"/></span>
+<p>This is a mashup page. Here you may specify city or area in the location search box. Then it would load traffic condition around that area (e.g. accidents, road works etc). Also if you specify the location in the format of "city, state" then the "show chart" link will load a comparative chart of 
+number of accidents happened around that city and state."<p>
+<span>Location(city,state): <input id="location" type="text"/></span>
 <button id="load-button" name="load" onclick="process()">Load</button>
 <p><a id="toggleJSON" href="#" onclick="showJSON()">Show JSON data</a></p>
 <p><a id="toggleJSON" href="#" onclick="getResults()">Show Chart</a></p>
-<div id="check"><img id="ven" src=""/></div>
+<div id="check"><img id="ven" src="" alt="no-image"/></div>
 <div id="json-response" hidden="">
 </div>
 <p>Traffic data<br/>Yellow spots indicates incidents (e.g. road works, accidents etc.). Green indicates normal traffic condition.</p>
