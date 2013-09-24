@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!--<script type="text/javascript" src="soapclient.js"></script> -->
+<script type="text/javascript">
+	
+	var url = "http://vhost1066.site1.compute.ihost.com/aspnet_client/WcfService3/Service1.svc/";
+
+	function parse(data) {
+		alert(data);
+	}
+
+	function identifyOp() {
+		var radio_group = document.getElementsByName("opName");
+		var opName;
+		for(var i = 0; i < radio_group.length; i++) {
+			if(radio_group[i].checked) opName = radio_group[i];
+		}
+		//alert(opName.value);
+		calculate(opName.value);
+	}
+
+	function calculate(opName) {
+		var xmlhttp2;		
+		if (window.XMLHttpRequest)  xmlhttp2 = new XMLHttpRequest();
+		else  xmlhttp2=new ActiveXObject("Microsoft.XMLHTTP");
+		xmlhttp2.onreadystatechange=function()
+		{
+			if (xmlhttp2.readyState==4 && xmlhttp2.status==200) {				
+				//alert(xmlhttp2.responseText);
+				var obj = JSON.parse(xmlhttp2.responseText);
+				var resultholder = document.getElementById("result");
+				resultholder.innerHTML = obj.result;
+				var errorholder = document.getElementById("error");
+				if(obj.ErrorMessage != "") errorholder.innerHTML = obj.ErrorMessage;
+			}
+		}
+
+		//url += "add";
+		url += opName;
+		var x = document.getElementById("x").value;
+		var y = document.getElementById("y").value;
+		url += "?x=" + x + "&y=" + y;
+		xmlhttp2.open("GET", url, true);
+		xmlhttp2.send();
+	}
+
+		
+</script>
+</head>
+
+<body>
+<span>Number 1: <input type="text" id="x" name="x" value = ""/></span>
+<span>Number 2: <input type="text" id="y" name="y" value = ""/></span>
+<dl>
+	<dt><input type="radio" name="opName" value="add"/> Add</dt>
+	<dt><input type="radio" name="opName" value="subtract"/> Subtract</dt>
+	<dt><input type="radio" name="opName" value="multiply"/> Multiply</dt>
+	<dt><input type="radio" name="opName" value="divide"/> Divide</dt>
+</dl>
+<input type="button" id="submit" value="Calculate" onclick="identifyOp();"/>
+<p> The result is: <span id="result"/></p>
+<p><span id="error"/></p>
+
+
+</body>
+</html>
+
+<!--
+	function calculate() {
+		var radio_group = document.getElementsByName("opName");
+		var opName;
+		for(var i = 0; i < radio_group.length; i++) {
+			if(radio_group[i].checked) opName = radio_group[i];
+		}
+		//alert(opName.value);
+
+		var pl = new SOAPClientParameters();
+		//pl.add("x","1");
+		//pl.add("y","1");
+		//alert(pl);
+		SOAPClient.invoke(url, "Add", pl, true, parse);
+	}
+	-->

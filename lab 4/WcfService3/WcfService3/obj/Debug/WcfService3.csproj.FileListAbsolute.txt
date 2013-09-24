@@ -1,0 +1,5 @@
+C:\Users\Mukit\documents\visual studio 2012\Projects\WcfService3\WcfService3\bin\WcfService3.dll
+C:\Users\Mukit\documents\visual studio 2012\Projects\WcfService3\WcfService3\bin\WcfService3.pdb
+C:\Users\Mukit\documents\visual studio 2012\Projects\WcfService3\WcfService3\obj\Debug\WcfService3.dll
+C:\Users\Mukit\documents\visual studio 2012\Projects\WcfService3\WcfService3\obj\Debug\WcfService3.pdb
+C:\Users\Mukit\Documents\Visual Studio 2012\Projects\WcfService3\WcfService3\obj\Debug\WcfService3.csprojResolveAssemblyReference.cache
