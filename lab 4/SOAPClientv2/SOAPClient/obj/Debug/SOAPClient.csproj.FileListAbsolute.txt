@@ -1,0 +1,4 @@
+C:\Users\Mukit\documents\visual studio 2012\Projects\SOAPClient\SOAPClient\bin\SOAPClient.dll
+C:\Users\Mukit\documents\visual studio 2012\Projects\SOAPClient\SOAPClient\bin\SOAPClient.pdb
+C:\Users\Mukit\documents\visual studio 2012\Projects\SOAPClient\SOAPClient\obj\Debug\SOAPClient.dll
+C:\Users\Mukit\documents\visual studio 2012\Projects\SOAPClient\SOAPClient\obj\Debug\SOAPClient.pdb

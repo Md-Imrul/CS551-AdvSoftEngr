@@ -2,3 +2,7 @@ C:\Users\Mukit\Documents\Visual Studio 2012\Projects\WcfService3\WcfService3\bin
 C:\Users\Mukit\Documents\Visual Studio 2012\Projects\WcfService3\WcfService3\bin\WcfService3.pdb
 C:\Users\Mukit\Documents\Visual Studio 2012\Projects\WcfService3\WcfService3\obj\Debug\WcfService3.dll
 C:\Users\Mukit\Documents\Visual Studio 2012\Projects\WcfService3\WcfService3\obj\Debug\WcfService3.pdb
+D:\07. Study\01. MS study\Fall 2013\Adv Soft Engr\git-repo\CS551-AdvSoftEngr\lab 4\WcfService3\WcfService3\bin\WcfService3.dll
+D:\07. Study\01. MS study\Fall 2013\Adv Soft Engr\git-repo\CS551-AdvSoftEngr\lab 4\WcfService3\WcfService3\bin\WcfService3.pdb
+D:\07. Study\01. MS study\Fall 2013\Adv Soft Engr\git-repo\CS551-AdvSoftEngr\lab 4\WcfService3\WcfService3\obj\Debug\WcfService3.dll
+D:\07. Study\01. MS study\Fall 2013\Adv Soft Engr\git-repo\CS551-AdvSoftEngr\lab 4\WcfService3\WcfService3\obj\Debug\WcfService3.pdb

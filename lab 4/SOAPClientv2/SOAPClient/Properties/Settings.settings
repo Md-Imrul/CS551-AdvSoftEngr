@@ -1,0 +1,12 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="SOAPClient.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="SOAPClient_WebService_WebService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://localhost:49847/WebService.asmx</Value>
+    </Setting>
+    <Setting Name="SOAPClient_RemoteWebReference_WebService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://170.224.164.46/aspnet_client/SOAPServer/WebService.asmx</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
@@ -19,6 +21,7 @@ namespace WcfService3
             int x = ((v1 != null) ? Int32.Parse(v1) : 0);
             int y = ((v2 != null) ? Int32.Parse(v2) : 0);
             int result = x + y;
+            addToDB("rest:add", x, y, "");
             return new OperationResponse("addition", x, y, result);
             
         }
@@ -29,6 +32,7 @@ namespace WcfService3
             int x = ((v1 != null) ? Int32.Parse(v1) : 0);
             int y = ((v2 != null) ? Int32.Parse(v2) : 0);
             int result = x - y;
+            addToDB("rest:sub", x, y, "");
             return new OperationResponse("subtract", x, y, result);
 
         }
@@ -39,6 +43,7 @@ namespace WcfService3
             int x = ((v1 != null) ? Int32.Parse(v1) : 0);
             int y = ((v2 != null) ? Int32.Parse(v2) : 0);
             int result = x * y;
+            addToDB("rest:sub", x, y, "");
             return new OperationResponse("multiply", x, y, result);
 
         }
@@ -49,15 +54,32 @@ namespace WcfService3
             int x = ((v1 != null) ? Int32.Parse(v1) : 0);
             int y = ((v2 != null) ? Int32.Parse(v2) : 0);
             int result = -1; 
-            string error = null;
+            string error = "";
             if(y > 0) result = x / y;
             else {
                 error = "Divide by zero exception.";
             }
+            addToDB("rest:div", x, y, error);
             OperationResponse r = new OperationResponse("divide", x, y, result);
-            if (error != null) r.ErrorMessage = error; 
+            r.ErrorMessage = error; 
             return r;
 
+        }
+
+        private bool addToDB(string opName, int x, int y, string error)
+        {
+
+            //string test = "undefined";
+            SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["dbString"].ConnectionString);
+            conn.Open();
+            SqlCommand slcmd = new SqlCommand("insert into opRequest(opName, x_val, y_val, error) values(@op,@x,@y,@e)", conn);
+            slcmd.Parameters.Add("@op", System.Data.SqlDbType.NChar).Value = opName;
+            slcmd.Parameters.Add("@x", System.Data.SqlDbType.Int).Value = x;
+            slcmd.Parameters.Add("@y", System.Data.SqlDbType.Int).Value = y;
+            slcmd.Parameters.Add("@e", System.Data.SqlDbType.Text).Value = error;
+            slcmd.ExecuteScalar();
+            
+            return true;
         }
 
         public CompositeType GetDataUsingDataContract(CompositeType composite)
