@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <title></title>
+  
+  
+  
+  <link rel="stylesheet" href="https://d10ajoocuyu32n.cloudfront.net/mobile/1.3.1/jquery.mobile-1.3.1.min.css">
+  
+  <!-- Extra Codiqa features -->
+  <link rel="stylesheet" href="codiqa.ext.css">
+  
+  <!-- jQuery and jQuery Mobile -->
+  <script src="https://d10ajoocuyu32n.cloudfront.net/jquery-1.9.1.min.js"></script>
+  <script src="https://d10ajoocuyu32n.cloudfront.net/mobile/1.3.1/jquery.mobile-1.3.1.min.js"></script>
+
+  <!-- Extra Codiqa features -->
+  <script src="https://d10ajoocuyu32n.cloudfront.net/codiqa.ext.js"></script>
+   
+</head>
+<body>
+<!-- Home -->
+<div data-role="page" id="page1">
+    <div class="header" id="p_header" data-theme="e" data-role="header">        
+		<h3>
+				Calculator
+		</h3>
+    </div>
+    <div data-role="content">
+	
+        <div data-role="fieldcontain">
+            <input name="" id="x" placeholder="Number 1" value="" type="text">
+        </div>
+        <div data-role="fieldcontain">
+            <input name="" id="y" placeholder="Number 2" value="" type="text">
+        </div>
+        <div data-role="fieldcontain">
+            <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+                <legend>
+                    Operation:
+                </legend>
+                <input id="radio1" name="opName" value="add" data-theme="c" type="radio">
+                <label for="radio1">
+                    Add
+                </label>
+                <input id="radio3" name="opName" value="subtract" data-theme="c" type="radio">
+                <label for="radio3">
+                    Subtract
+                </label>
+                <input id="radio4" name="opName" value="multiply" data-theme="c" type="radio">
+                <label for="radio4">
+                    Multiply
+                </label>
+                <input id="radio5" name="opName" value="divide" data-theme="c" type="radio">
+                <label for="radio5">
+                    Divide
+                </label>
+            </fieldset>
+        </div>
+        <input id="submit" data-theme="b" value="Calculate" type="submit" onclick="identifyOp()">        
+		<h3 id="result"> Result:
+        </h3>		 
+    </div>
+	<script type="text/javascript">
+	
+	var url = "http://vhost1066.site1.compute.ihost.com/aspnet_client/WcfService3/Service1.svc/";
+
+	function identifyOp() {
+		var radio_group = document.getElementsByName("opName");
+		var opName;
+		for(var i = 0; i < radio_group.length; i++) {
+			if(radio_group[i].checked) opName = radio_group[i];
+		}
+		//alert(opName.value);
+		calculate(opName.value);
+	}
+
+	function calculate(opName) {
+		var xmlhttp2;		
+		if (window.XMLHttpRequest)  xmlhttp2 = new XMLHttpRequest();
+		else  xmlhttp2=new ActiveXObject("Microsoft.XMLHTTP");
+		xmlhttp2.onreadystatechange=function()
+		{
+			if (xmlhttp2.readyState==4 && xmlhttp2.status==200) {				
+				alert(xmlhttp2.responseText);
+				var obj = JSON.parse(xmlhttp2.responseText);
+				var resultholder = document.getElementById("result");
+				resultholder.innerHTML = "Result: " + obj.result;
+				if(obj.ErrorMessage != "") {
+					resultholder.innerHTML = "Result: denominator can not be zero";
+				}
+			}
+		}
+
+		//url += "add";
+		url += opName;
+		var x = document.getElementById("x").value;
+		var y = document.getElementById("y").value;
+		url += "?x=" + x + "&y=" + y;
+		xmlhttp2.open("GET", url, true);
+		xmlhttp2.send();
+	}		
+	</script>
+</div>
+</body>
+</html>
