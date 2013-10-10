@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <title></title>
+  
+  <script src="http://www.mapquestapi.com/sdk/js/v7.0.s/mqa.toolkit.js?key=Fmjtd%7Cluub2h6b2u%2Cbg%3Do5-9uz596"></script> 
+  
+  <link rel="stylesheet" href="https://d10ajoocuyu32n.cloudfront.net/mobile/1.3.1/jquery.mobile-1.3.1.min.css">
+  
+  <!-- Extra Codiqa features -->
+  <link rel="stylesheet" href="codiqa.ext.css">
+  
+  <!-- jQuery and jQuery Mobile -->
+  <script src="https://d10ajoocuyu32n.cloudfront.net/jquery-1.9.1.min.js"></script>
+  <script src="https://d10ajoocuyu32n.cloudfront.net/mobile/1.3.1/jquery.mobile-1.3.1.min.js"></script>
+
+  <!-- Extra Codiqa features -->
+  <script src="https://d10ajoocuyu32n.cloudfront.net/codiqa.ext.js"></script>
+   
+</head>
+<body>
+<!-- Home -->
+<div data-role="page" id="page1">
+    <div data-theme="a" data-role="header">
+        <h3 class="header">
+            Mashup
+        </h3>
+    </div>
+    <div data-role="content">
+        <h5 class="description">
+            This is a mashup page. Here you may specify city or area in the search box. Then it would load traffic condition around that area (e.g. accidents, road works etc). Also if you specify the location in the format of "city, state" then the "show chart" link will load a comparative chart of number of accidents happened around that city and state.
+        </h5>
+        <div data-role="fieldcontain">
+			<input name="" id="location" placeholder="City, State" value="Kansas city, MO"
+            data-mini="true" type="search">
+        </div>
+        <input id="load-button" data-inline="true" data-icon="search" data-iconpos="left"
+        value="Submit" data-mini="true" type="submit" onclick="process()">
+        <div id="collapeDivs" data-role="collapsible-set">
+            <div data-role="collapsible">
+                <h3>
+                    Show JSON
+                </h3>
+				<div id="json-response">No data available.</div>
+            </div>
+            <div data-role="collapsible" onclick="getResults()">
+                <h3>
+                    Show Chart
+                </h3>
+				<div id="check"><img id="ven" src="" alt="no-image"/></div>
+            </div>
+        </div>
+        <h4>
+            Traffic Map:
+        </h4>		
+        <img id="image" src="https://maps.googleapis.com/maps/api/staticmap?center=Madison, WI&amp;zoom=10&amp;size=288x200&amp;markers=Madison, WI&amp;sensor=false"
+        height="200" width="288">		
+        <h4>
+            Geo Map:
+        </h4>
+		<div id="map">This part isn't working properly, probably the issue is rendering Map API return data with Jquery CSS.
+    </div>
+</div>
+<script type="text/javascript">
+	var xmlhttp;
+	var boundingBox;
+	var incidentURL = "http://www.mapquestapi.com/traffic/v2/incidents?key=Fmjtd%7Cluub2h6b2u%2Cbg%3Do5-9uz596";
+	var gurl ="https://www.googleapis.com/customsearch/v1?key=AIzaSyCde5Hxz11Z-SFEtZSQO0f7PjUhdhEHo5U&cx=013036536707430787589:_pqjad5hr1a&q=accident"
+	
+	var cityCount = 0; var stateCount = 0;
+	
+	function getResults() {
+		var location = document.getElementById("location").value;
+		var city = location.split(",")[0];
+		var state = location.split(",")[1];
+		if(location != "") {
+			data1(city);		
+			data2(state);
+			loadVen();
+		}
+	}
+
+	function loadVen() {
+		var img = document.getElementById("ven");
+		var url = "https://chart.googleapis.com/chart?cht=v&chs=250x100&chd=t:";
+		url += cityCount + ",";
+		url += stateCount + ",0,50";
+		img.src = url;
+	}
+
+
+	function data1(city) {
+		var xmlhttp2;
+		gurl += " " + city;
+		if (window.XMLHttpRequest)  xmlhttp2 = new XMLHttpRequest();
+		else  xmlhttp2=new ActiveXObject("Microsoft.XMLHTTP");
+		xmlhttp2.onreadystatechange=function()
+		{
+			if (xmlhttp2.readyState==4 && xmlhttp2.status==200) {				
+				var index = xmlhttp2.responseText.indexOf("totalResults"); 
+				var temp = xmlhttp2.responseText.substr(index);
+				var index2 = temp.indexOf(","); 
+				var temp2 = temp.slice(16, index2-1);
+				cityCount = parseInt(temp2);	
+			}
+		}
+
+		xmlhttp2.open("GET", gurl, true);
+		xmlhttp2.send();
+	}
+
+	function data2(state) {
+		var xmlhttp2;
+		if (window.XMLHttpRequest)  xmlhttp2 = new XMLHttpRequest();
+		else  xmlhttp2=new ActiveXObject("Microsoft.XMLHTTP");
+		gurl += " " + state;
+		xmlhttp2.onreadystatechange=function()
+		{
+			if (xmlhttp2.readyState==4 && xmlhttp2.status==200) {				
+				var index = xmlhttp2.responseText.indexOf("totalResults"); 
+				var temp = xmlhttp2.responseText.substr(index);
+				var index2 = temp.indexOf(","); 
+				var temp2 = temp.slice(16, index2-1);
+				stateCount = parseInt(temp2);
+			}
+		}
+		xmlhttp2.open("GET", gurl, true);
+		xmlhttp2.send();
+	}
+
+	function process() {
+		var URL = "http://www.mapquestapi.com/geocoding/v1/address?key=Fmjtd%7Cluub2h6b2u%2Cbg%3Do5-9uz596";
+		var location = document.getElementById("location").value;
+		URL += "&location=" + escape(location);
+		if (window.XMLHttpRequest)  xmlhttp=new XMLHttpRequest();
+		else  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+		xmlhttp.onreadystatechange=function()
+		{
+			if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+				var div = document.getElementById("json-response");
+				div.innerHTML = xmlhttp.responseText;
+				//div.hidden= "hidden";
+				var response = JSON.parse(xmlhttp.responseText);
+				handleGeocodeResponse(response);
+			}
+		}
+		
+//		xmlhttp.open("GET","http://www.mapquestapi.com/geocoding/v1/address?key=Fmjtd|luub2h6b2u%2Cbg%3Do5-9uz596&location=lees%20summit%2CMO",true);
+		xmlhttp.open("GET", URL, true);
+		xmlhttp.send();
+	}
+
+	function handleGeocodeResponse(response) {
+		// process response
+		var location = response.results[0].locations[0].latLng;
+		loadMap(location);
+		
+	}
+	function loadMap(location) {
+		var map = document.getElementById("map");
+		map.innerHTML="";
+		var options={
+        elt:map,       /*ID of element on the page where you want the map added*/ 
+        zoom:14,                                  /*initial zoom level of the map*/ 
+        latLng:{lat:location.lat, lng:location.lng},  /*center of map in latitude/longitude */ 
+        mtype:'map',                              /*map type (map)*/ 
+        bestFitMargin:0,                          /*margin offset from the map viewport when applying a bestfit on shapes*/ 
+        zoomOnDoubleClick:true                    /*zoom in when double-clicking on map*/ 
+      };
+      /*Construct an instance of MQA.TileMap with the options object*/ 
+      window.map = new MQA.TileMap(options);
+	  //document.getElementById("maptext").hidden = "";
+	  loadTraffic(location);
+	}
+
+	function loadTraffic(location) {
+		var img = document.getElementById("image");
+		var url = "http://www.mapquestapi.com/traffic/v2/flow?key=Fmjtd|luub2h6b2u%2Cbg%3Do5-9uz596";
+		url += "&mapLat=" + location.lat + "&mapLng=" + location.lng;
+		url += "&mapHeight=400&mapWidth=400&mapScale=433342";
+		img.src = url;
+		getResults();
+	}
+	function showJSON() {
+		var toggle = document.getElementById("toggleJSON");
+		var jsondiv = document.getElementById("json-response");
+		if(toggle.innerHTML == "Show JSON data") { // show the data
+			jsondiv.hidden = "";
+			toggle.innerHTML = "Hide JSON data";
+		}
+		else { // hide the data
+			jsondiv.hidden = "hidden";
+			toggle.innerHTML = "Show JSON data";
+		}
+	}
+
+</script>
+</body>
+</html>

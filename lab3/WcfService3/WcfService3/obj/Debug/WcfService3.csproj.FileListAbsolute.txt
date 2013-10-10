@@ -1,0 +1,5 @@
+D:\07. Study\01. MS study\Fall 2013\Adv Soft Engr\git-repo\CS551-AdvSoftEngr\lab3\WcfService3\WcfService3\bin\WcfService3.dll
+D:\07. Study\01. MS study\Fall 2013\Adv Soft Engr\git-repo\CS551-AdvSoftEngr\lab3\WcfService3\WcfService3\bin\WcfService3.pdb
+D:\07. Study\01. MS study\Fall 2013\Adv Soft Engr\git-repo\CS551-AdvSoftEngr\lab3\WcfService3\WcfService3\obj\Debug\WcfService3.csprojResolveAssemblyReference.cache
+D:\07. Study\01. MS study\Fall 2013\Adv Soft Engr\git-repo\CS551-AdvSoftEngr\lab3\WcfService3\WcfService3\obj\Debug\WcfService3.dll
+D:\07. Study\01. MS study\Fall 2013\Adv Soft Engr\git-repo\CS551-AdvSoftEngr\lab3\WcfService3\WcfService3\obj\Debug\WcfService3.pdb
