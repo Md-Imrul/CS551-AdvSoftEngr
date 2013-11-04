@@ -1,0 +1,5 @@
+c:\users\mukit\documents\visual studio 2012\Projects\EzGiftRestServices\EzGiftRestServices\bin\EzGiftRestServices.dll
+c:\users\mukit\documents\visual studio 2012\Projects\EzGiftRestServices\EzGiftRestServices\bin\EzGiftRestServices.pdb
+c:\users\mukit\documents\visual studio 2012\Projects\EzGiftRestServices\EzGiftRestServices\obj\Debug\EzGiftRestServices.csprojResolveAssemblyReference.cache
+c:\users\mukit\documents\visual studio 2012\Projects\EzGiftRestServices\EzGiftRestServices\obj\Debug\EzGiftRestServices.dll
+c:\users\mukit\documents\visual studio 2012\Projects\EzGiftRestServices\EzGiftRestServices\obj\Debug\EzGiftRestServices.pdb

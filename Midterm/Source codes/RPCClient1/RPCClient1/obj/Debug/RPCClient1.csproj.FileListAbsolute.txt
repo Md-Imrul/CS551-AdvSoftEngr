@@ -1,0 +1,6 @@
+c:\users\mukit\documents\visual studio 2012\Projects\RPCClient1\RPCClient1\bin\Debug\RPCClient1.exe
+c:\users\mukit\documents\visual studio 2012\Projects\RPCClient1\RPCClient1\bin\Debug\RPCClient1.pdb
+c:\users\mukit\documents\visual studio 2012\Projects\RPCClient1\RPCClient1\bin\Debug\CookComputing.XmlRpcV2.dll
+c:\users\mukit\documents\visual studio 2012\Projects\RPCClient1\RPCClient1\obj\Debug\RPCClient1.csprojResolveAssemblyReference.cache
+c:\users\mukit\documents\visual studio 2012\Projects\RPCClient1\RPCClient1\obj\Debug\RPCClient1.exe
+c:\users\mukit\documents\visual studio 2012\Projects\RPCClient1\RPCClient1\obj\Debug\RPCClient1.pdb
